@@ -11,7 +11,10 @@ projectRouter.post("/:projectId/api-keys" , apiKeysController.generateKey ) ;
 
 projectRouter.put("/api-keys/:id/revoke" , apiKeysController.revoke) ;
 
-projectRouter.delete("/api-keys/:id/delete" , apiKeysController.delete)
+projectRouter.delete("/api-keys/:id/delete" , apiKeysController.delete);
+
+projectRouter.delete("/api-keys/:id/make-active" , apiKeysController.makeActive);
+
 
 projectRouter.get("/:id", projectController.getProjectById);
 
