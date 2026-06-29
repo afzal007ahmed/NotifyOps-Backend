@@ -8,7 +8,7 @@ const { default: Redis } = require("ioredis");
 
 const redis = new Redis();
 
-function runWorker( io) {
+function runWorker(io) {
   new Worker(
     "notifications",
     async (job) => {
@@ -204,7 +204,7 @@ function runWorker( io) {
           },
           { where: { job_id: job.id } },
         );
-        throw new Error(error.message);
+        throw new Error(error.message, { cause: error });
       }
 
       try {
@@ -324,7 +324,9 @@ function runWorker( io) {
           },
           { where: { job_id: job.id } },
         );
-        throw new Error(error.message);
+        throw new Error(error.message, {
+          cause: error,
+        });
       }
 
       try {
@@ -461,7 +463,7 @@ function runWorker( io) {
           { where: { job_id: job.id } },
         );
 
-        throw new Error(error.message);
+        throw new Error(error.message, { cause: error });
       }
     },
     {
@@ -474,4 +476,4 @@ function runWorker( io) {
   );
 }
 
-module.exports = {runWorker}
+module.exports = { runWorker };

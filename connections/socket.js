@@ -38,7 +38,7 @@ const initializeSocket = (server) => {
       socket.project_id = apiKeyExists.proj_id;
 
       return next();
-    } catch (err) {
+    } catch (_err) {
       return next(new Error("AUTH_FAILED"));
     }
   });

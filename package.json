@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "bullmq": "^5.79.1",
@@ -16,5 +22,10 @@
     "uuid": "^14.0.1",
     "websocket": "^1.0.35",
     "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.6.0",
+    "globals": "^17.7.0"
   }
 }
