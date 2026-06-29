@@ -1,12 +1,12 @@
 const { authMiddleware } = require("../../middlewares/authMiddleware");
 const express = require("express");
-const { authRouter } = require("./auth");
-const { publicRouter } = require("./public");
-const { projectRouter } = require("./project");
-const { organisationRouter } = require("./origanisation");
+const { authRouter } = require("./auths");
+const { publicRouter } = require("./publics");
+const { projectRouter } = require("./projects");
+const { organisationRouter } = require("./origanisations");
 const { subscriptionRouter } = require("./subscriptions");
 const { logsRouter } = require("./logs");
-const { templateRouter } = require("./template");
+const { templateRouter } = require("./templates");
 const { errorMiddleware } = require("../../middlewares/errorMiddleware");
 
 const allRoutes = require("express").Router();

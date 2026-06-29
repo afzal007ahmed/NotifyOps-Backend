@@ -21,6 +21,7 @@ const projectModel = (sequelize, DataTypes) => {
     },
     {
       timestamps: true,
+      tableName : "projects"
     },
   );
 

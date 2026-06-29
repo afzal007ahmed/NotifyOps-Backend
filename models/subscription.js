@@ -39,6 +39,7 @@ const subscriptionModel = (sequelize, DataTypes) => {
     },
     {
       timestamps: true,
+      tableName : "subscriptions"
     }
   );
 

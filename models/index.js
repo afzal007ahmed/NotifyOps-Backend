@@ -1,15 +1,15 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../connections/sequelize");
 
-const usersModel = require("./users");
+const usersModel = require("./user");
 const organisationModel = require("./organisation");
 const { subscriptionModel } = require("./subscription");
 const { projectModel } = require("./project");
-const apiKeysModel = require("./apikeys");
+const apiKeysModel = require("./apikey");
 const { templateModel } = require("./template");
-const { logsModel } = require("./logs");
+const { logsModel } = require("./log");
 const { usageModel } = require("./usage");
-const { limitsModel } = require("./limits");
+const { limitsModel } = require("./limit");
 
 const subscription = subscriptionModel(sequelize, DataTypes);
 const users = usersModel(sequelize, DataTypes);

@@ -21,7 +21,7 @@ const usageModel = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "usage",
+      tableName: "usages",
       timestamps: true,
     },
   );
