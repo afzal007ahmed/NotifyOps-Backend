@@ -1,7 +1,7 @@
-const { notificationsController } = require("../controllers/notifications");
+const { notificationsController } = require("../../controllers/notifications");
 const {
   publicRequestValidationMiddleware,
-} = require("../middlewares/publicRequestValidationMiddleware");
+} = require("../../middlewares/publicRequestValidationMiddleware");
 
 const publicRouter = require("express").Router();
 

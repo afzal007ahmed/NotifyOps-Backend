@@ -123,6 +123,25 @@ const apiKeysController = {
       next(error);
     }
   },
+  makeActive: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+
+      if (!id) {
+        const err = new Error("Api key id is missing");
+        err.statusCode = 404;
+        err.code = "ID_MISSING";
+        throw err;
+      }
+
+      await apiKeys.update({ status: "active" }, { where: { id: id } });
+      res.status(200).json({
+        success: true,
+      });
+    } catch (error) {
+      next(error)
+    }
+  },
 };
 
 module.exports = { apiKeysController };

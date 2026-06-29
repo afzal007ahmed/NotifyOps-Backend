@@ -1,5 +1,5 @@
-const { apiKeysController } = require("../controllers/apikeys");
-const { projectController } = require("../controllers/projectController");
+const { apiKeysController } = require("../../controllers/apikeys");
+const { projectController } = require("../../controllers/projectController");
 
 const projectRouter = require("express").Router();
 

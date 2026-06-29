@@ -1,4 +1,4 @@
-const { logsController } = require('../controllers/logs');
+const { logsController } = require('../../controllers/logs');
 
 const logsRouter = require('express').Router() ;
 

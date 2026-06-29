@@ -1,4 +1,4 @@
-const { templateController } = require("../controllers/template");
+const { templateController } = require("../../controllers/template");
 
 const templateRouter = require("express").Router();
 

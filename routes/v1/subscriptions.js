@@ -1,4 +1,4 @@
-const { subscriptionController } = require("../controllers/subscription");
+const { subscriptionController } = require("../../controllers/subscription");
 
 const subscriptionRouter = require("express").Router();
 
