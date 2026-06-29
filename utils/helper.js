@@ -36,7 +36,7 @@ const parseNotificationPayload = (payload, batch) => {
   if (!payload || typeof payload !== "object") return {};
   return {
     data: payload.data,
-    template_name: payload.template_name,
+    template_id: payload.template_id.trim(),
     channel: payload.channel,
     ...(!batch && { to: payload.to }),
   };
