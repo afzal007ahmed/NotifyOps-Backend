@@ -9,26 +9,26 @@ const { logsRouter } = require("./logs");
 const { templateRouter } = require("./templates");
 const { errorMiddleware } = require("../../middlewares/errorMiddleware");
 
-const allRoutes = require("express").Router();
+const v1Routes = require("express").Router();
 
-allRoutes.use(express.json());
+v1Routes.use(express.json());
 
-allRoutes.use("/auth", authRouter);
+v1Routes.use("/auth", authRouter);
 
-allRoutes.use("/api", publicRouter);
+v1Routes.use("/api", publicRouter);
 
-allRoutes.use(authMiddleware);
+v1Routes.use(authMiddleware);
 
-allRoutes.use("/projects", projectRouter);
+v1Routes.use("/projects", projectRouter);
 
-allRoutes.use("/organisations", organisationRouter);
+v1Routes.use("/organisations", organisationRouter);
 
-allRoutes.use("/subscriptions", subscriptionRouter);
+v1Routes.use("/subscriptions", subscriptionRouter);
 
-allRoutes.use("/logs", logsRouter);
+v1Routes.use("/logs", logsRouter);
 
-allRoutes.use("/templates", templateRouter);
+v1Routes.use("/templates", templateRouter);
 
-allRoutes.use(errorMiddleware);
+v1Routes.use(errorMiddleware);
 
-module.exports = { allRoutes };
+module.exports = { v1Routes };

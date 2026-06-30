@@ -4,7 +4,7 @@ const fs = require('fs')
 const cors = require("cors");
 const morgan = require("morgan");
 const { config } = require("./config");
-const { allRoutes } = require("./routes/v1");
+const { allRoutes } = require("./routes/index");
 const path = require("path");
 
 app.use(
@@ -22,6 +22,6 @@ const accessLogStream = fs.createWriteStream(
 
 app.use(morgan("combined", { stream: accessLogStream }));
 
-app.use("/v1", allRoutes);
+app.use("/", allRoutes);
 
 module.exports = { app };
