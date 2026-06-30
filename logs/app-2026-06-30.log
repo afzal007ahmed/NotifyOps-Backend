@@ -4,3 +4,10 @@
 {"level":"info","message":"server is listening at port : 3000","timestamp":"2026-06-30T10:02:08.045Z"}
 {"level":"info","message":"server is listening at port : 3000","timestamp":"2026-06-30T10:06:22.309Z"}
 {"level":"info","message":"server is listening at port : 3000","timestamp":"2026-06-30T10:09:35.437Z"}
+{"level":"error","message":"connect ETIMEDOUT 172.31.3.118:5432","timestamp":"2026-06-30T11:52:41.680Z"}
+{"level":"error","message":"connect ETIMEDOUT 172.31.3.118:5432","timestamp":"2026-06-30T11:57:48.880Z"}
+{"level":"error","message":"connect ETIMEDOUT 3.18.77.236:5432","timestamp":"2026-06-30T12:21:13.809Z"}
+{"level":"error","message":"no pg_hba.conf entry for host \"14.141.47.2\", user \"postgres\", database \"postgres\", no encryption","timestamp":"2026-06-30T12:24:47.352Z"}
+{"level":"error","message":"no pg_hba.conf entry for host \"14.141.47.2\", user \"postgres\", database \"postgres\", no encryption","timestamp":"2026-06-30T12:25:12.028Z"}
+{"level":"error","message":"no pg_hba.conf entry for host \"14.141.47.2\", user \"postgres\", database \"postgres\", no encryption","timestamp":"2026-06-30T12:25:24.454Z"}
+{"level":"info","message":"server is listening at port : 3000","timestamp":"2026-06-30T12:26:40.001Z"}
