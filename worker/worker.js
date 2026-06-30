@@ -1,12 +1,10 @@
 const { Worker } = require("bullmq");
-const { connection } = require("../connections/redis");
+const { connection } = require("../connections/connection");
 const { logs, usage, limits, template } = require("../models");
 const { injectVariablesInTemplateForOneRecipient } = require("../utils/helper");
 const { sendEmail } = require("../providers/email");
 const { sendSms } = require("../providers/sms");
-const { default: Redis } = require("ioredis");
 
-const redis = new Redis();
 
 function runWorker(io) {
   new Worker(
@@ -37,16 +35,16 @@ function runWorker(io) {
 
       const orgId = job.data.user.org_id;
 
-      let emailLimit = await redis.get(`org_id:${orgId}:email`);
-      let smsLimit = await redis.get(`org_id:${orgId}:sms`);
-      let inappLimit = await redis.get(`org_id:${orgId}:inapp`);
+      let emailLimit = await connection.get(`org_id:${orgId}:email`);
+      let smsLimit = await connection.get(`org_id:${orgId}:sms`);
+      let inappLimit = await connection.get(`org_id:${orgId}:inapp`);
 
       if (!emailLimit || !smsLimit || !inappLimit) {
         const limit = await limits.findOne({
           where: { org_id: orgId },
         });
         if (!emailLimit) {
-          await redis.set(
+          await connection.set(
             `org_id:${orgId}:email`,
             (limit?.email_limit || 0).toString(),
             "EX",
@@ -55,7 +53,7 @@ function runWorker(io) {
         }
 
         if (!smsLimit) {
-          await redis.set(
+          await connection.set(
             `org_id:${orgId}:sms`,
             (limit?.sms_limit || 0).toString(),
             "EX",
@@ -64,7 +62,7 @@ function runWorker(io) {
         }
 
         if (!inappLimit) {
-          await redis.set(
+          await connection.set(
             `org_id:${orgId}:inapp`,
             (limit?.inapp_limit || 0).toString(),
             "EX",
@@ -90,12 +88,12 @@ function runWorker(io) {
                   title,
                   user,
                 );
-              const remaining = await redis.decr(
+              const remaining = await connection.decr(
                 `org_id:${job.data.user.org_id}:email`,
               );
 
               if (remaining < 0) {
-                await redis.incr(`org_id:${job.data.user.org_id}:email`);
+                await connection.incr(`org_id:${job.data.user.org_id}:email`);
                 throw new Error("Organisation email limit has been exhausted.");
               }
               usageData.email_count++;
@@ -142,12 +140,12 @@ function runWorker(io) {
               { where: { job_id: job.id } },
             );
           } else {
-            const remaining = await redis.decr(
+            const remaining = await connection.decr(
               `org_id:${job.data.user.org_id}:email`,
             );
 
             if (remaining < 0) {
-              await redis.incr(`org_id:${job.data.user.org_id}:email`);
+              await connection.incr(`org_id:${job.data.user.org_id}:email`);
               throw new Error("Organisation email limit has been exhausted.");
             }
             const { templateBody, templateTitle } =
@@ -215,12 +213,12 @@ function runWorker(io) {
             let result = [];
 
             for (let d of job.data.data) {
-              const remaining = await redis.decr(
+              const remaining = await connection.decr(
                 `org_id:${job.data.user.org_id}:sms`,
               );
 
               if (remaining < 0) {
-                await redis.incr(`org_id:${job.data.user.org_id}:sms`);
+                await connection.incr(`org_id:${job.data.user.org_id}:sms`);
                 throw new Error("Organisation sms limit has been exhausted.");
               }
               usageData.sms_count++;
@@ -267,12 +265,12 @@ function runWorker(io) {
               { where: { job_id: job.id } },
             );
           } else {
-            const remaining = await redis.decr(
+            const remaining = await connection.decr(
               `org_id:${job.data.user.org_id}:sms`,
             );
 
             if (remaining < 0) {
-              await redis.incr(`org_id:${job.data.user.org_id}:sms`);
+              await connection.incr(`org_id:${job.data.user.org_id}:sms`);
               throw new Error("Organisation sms limit has been exhausted.");
             }
             const response = await sendSms();
@@ -346,12 +344,12 @@ function runWorker(io) {
                   d,
                 );
 
-              const remaining = await redis.decr(
+              const remaining = await connection.decr(
                 `org_id:${job.data.user.org_id}:inapp`,
               );
 
               if (remaining < 0) {
-                await redis.incr(`org_id:${job.data.user.org_id}:inapp`);
+                await connection.incr(`org_id:${job.data.user.org_id}:inapp`);
                 throw new Error("Organisation inapp limit has been exhausted.");
               }
 
@@ -395,12 +393,12 @@ function runWorker(io) {
                 job.data.data,
               );
 
-            const remaining = await redis.decr(
+            const remaining = await connection.decr(
               `org_id:${job.data.user.org_id}:inapp`,
             );
 
             if (remaining < 0) {
-              await redis.incr(`org_id:${job.data.user.org_id}:inapp`);
+              await connection.incr(`org_id:${job.data.user.org_id}:inapp`);
               throw new Error("Organisation inapp limit has been exhausted.");
             }
 
