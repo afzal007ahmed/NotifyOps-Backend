@@ -467,6 +467,7 @@ function runWorker(io) {
     },
     {
       connection: connection,
+      prefix : "{bull}",
       limiter: {
         max: 10,
         duration: 1000,
