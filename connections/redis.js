@@ -5,8 +5,7 @@ const connection = new IORedis({
   host: config.redis.host,
   port: config.redis.port,
   maxRetriesPerRequest: null,
+  tls: {},
 });
 
-
-
-module.exports = { connection } ;
+module.exports = { connection };
