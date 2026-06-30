@@ -39,26 +39,26 @@ const publicRequestValidationMiddleware = async (req, res, next) => {
       });
     }
 
-    const templateName = req.body.template_name;
+    const templateId = req.body.template_id;
 
-    if (!templateName) {
+    if (!templateId) {
       return res.status(400).json({
         success: false,
-        code: "MISSING_TEMPLATE_NAME",
-        message: "Missing template name",
+        code: "MISSING_TEMPLATE_ID",
+        message: "Missing template id",
       });
     }
     const findTemplate = await template.findOne({
       where: {
         proj_id: apiKeyExists.proj_id,
-        template_name: templateName.trim(),
+        id: templateId,
       },
     });
     if (!findTemplate) {
       return res.status(400).json({
         success: false,
-        code: "INVALID_TEMPLATE_NAME",
-        message: "Invalid template name",
+        code: "INVALID_TEMPLATE_ID",
+        message: "Invalid template id",
       });
     }
 

@@ -1,7 +1,9 @@
 {
   "scripts": {
+    "start": "node server.js",
     "dev": "node server.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

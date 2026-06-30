@@ -8,19 +8,18 @@ const { default: Redis } = require("ioredis");
 
 const redis = new Redis();
 
-function runWorker( io) {
+function runWorker(io) {
   new Worker(
     "notifications",
     async (job) => {
-      const templateName = job.data.template_name;
+      const templateId = job.data.template_id;
 
       const { variables, body, title } = await template.findOne({
         where: {
-          template_name: templateName,
+          id: templateId,
           proj_id: job.data.user.project_id,
         },
       });
-
       const jobStatus = await logs.findOne({ where: { job_id: job.id } });
 
       const usageData = { email_count: 0, sms_count: 0, inapp_count: 0 };
@@ -204,9 +203,7 @@ function runWorker( io) {
           },
           { where: { job_id: job.id } },
         );
-        throw new Error(error.message , {
-          cause : error
-        });
+        throw new Error(error.message, { cause: error });
       }
 
       try {
@@ -326,8 +323,8 @@ function runWorker( io) {
           },
           { where: { job_id: job.id } },
         );
-        throw new Error(error.message , { 
-          cause : error
+        throw new Error(error.message, {
+          cause: error,
         });
       }
 
@@ -465,7 +462,7 @@ function runWorker( io) {
           { where: { job_id: job.id } },
         );
 
-        throw new Error(error.message , { cause : error});
+        throw new Error(error.message, { cause: error });
       }
     },
     {
@@ -478,4 +475,4 @@ function runWorker( io) {
   );
 }
 
-module.exports = {runWorker}
+module.exports = { runWorker };
