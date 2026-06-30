@@ -4,6 +4,7 @@ const { initializeSocket } = require("./connections/socket");
 const { sequelize } = require("./models");
 const http = require("http");
 const { runWorker } = require("./worker/worker");
+const applicationLogger = require("./logger/applicationLogger");
 
 
 async function server() {
@@ -14,10 +15,10 @@ async function server() {
     const io = initializeSocket(server);
     runWorker(io)
     server.listen(config.port, () =>
-      console.log("server is listening at port :", config.port),
+      applicationLogger.info(`server is listening at port : ${config.port}`),
     );
   } catch (error) {
-    console.log(error.message);
+    applicationLogger.error(error.message);
   }
 }
 
