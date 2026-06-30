@@ -1,5 +1,5 @@
 const { Worker } = require("bullmq");
-const { connection } = require("../connections/connection");
+const { connection } = require("../connections/redis");
 const { logs, usage, limits, template } = require("../models");
 const { injectVariablesInTemplateForOneRecipient } = require("../utils/helper");
 const { sendEmail } = require("../providers/email");
