@@ -1,18 +1,27 @@
 const express = require("express");
 const app = express();
+const fs = require('fs')
 const cors = require("cors");
+const morgan = require("morgan");
 const { config } = require("./config");
 const { allRoutes } = require("./routes/v1");
-
+const path = require("path");
 
 app.use(
   cors({
     origin: config.cors.origin,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE" ],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   }),
 );
 
-app.use('/v1' , allRoutes )
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "logs/access.log"),
+  { flags: "a" },
+);
+
+app.use(morgan("combined", { stream: accessLogStream }));
+
+app.use("/v1", allRoutes);
 
 module.exports = { app };
