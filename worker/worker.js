@@ -204,7 +204,9 @@ function runWorker( io) {
           },
           { where: { job_id: job.id } },
         );
-        throw new Error(error.message);
+        throw new Error(error.message , {
+          cause : error
+        });
       }
 
       try {
@@ -324,7 +326,9 @@ function runWorker( io) {
           },
           { where: { job_id: job.id } },
         );
-        throw new Error(error.message);
+        throw new Error(error.message , { 
+          cause : error
+        });
       }
 
       try {
@@ -461,7 +465,7 @@ function runWorker( io) {
           { where: { job_id: job.id } },
         );
 
-        throw new Error(error.message);
+        throw new Error(error.message , { cause : error});
       }
     },
     {

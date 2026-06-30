@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "dev": "node server.js",
+    "lint": "eslint ."
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "bullmq": "^5.79.1",
@@ -15,6 +19,13 @@
     "socket.io": "^4.8.3",
     "uuid": "^14.0.1",
     "websocket": "^1.0.35",
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0",
     "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.6.0",
+    "globals": "^17.7.0"
   }
 }

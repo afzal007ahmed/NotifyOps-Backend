@@ -33,6 +33,7 @@ function apiKeysModel(sequelize, DataTypes) {
     {
       timestamps: true,
       tableName: "api_keys",
+      paranoid : true 
     }
   );
 

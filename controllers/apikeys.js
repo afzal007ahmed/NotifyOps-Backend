@@ -114,8 +114,7 @@ const apiKeysController = {
         err.code = "ID_MISSING";
         throw err;
       }
-
-      await apiKeys.update({ status: "deleted" }, { where: { id: id } });
+      await apiKeys.destroy({ where : id })
       res.status(200).json({
         success: true,
       });
